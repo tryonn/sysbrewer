@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
 <head>
 <meta charset="ISO-8859-1">
 <title>### ...Cadastro de Cervejas... ###</title>
@@ -10,6 +12,8 @@
 
 
 	<form method="POST">
+		<span th:text="${message}"></span>
+	
 		<label for="sku">SKU</label><br> <input type="text" id="sku"
 			name="sku"> <br> <label for="nome">Nome</label><br>
 		<input type="text" id="nome" name="Nome"> <br> <input
