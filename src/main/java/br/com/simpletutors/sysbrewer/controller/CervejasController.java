@@ -17,10 +17,9 @@ public class CervejasController {
 	
 	// se for um get chama esse
 	@RequestMapping("/cervejas/novo")
-	public String novo(){
+	public String novo(Cerveja cerveja){
 		return "cerveja/CadastroCerveja";
 	}
-	
 	
 	// se for um post chama esse
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
@@ -28,15 +27,10 @@ public class CervejasController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("message", "Erro no formulario"); // manda mensagem para tela
-			
-			System.out.println("Tem error....");
-			return "cerveja/CadastroCerveja"; // manda para propria pagina quando de erro
-		}
-		System.out.println(">>>>>> cadastrar!: " + cerveja.getSku());
-		
+			return novo(cerveja); // manda para propria pagina quando de erro
+		}		
 		//model.addAttribute("message", "Registro salvo"); // essa maneira aqui não funciona pq estamos utilizando um redirect. E os dados se pedem
 		//para o redirect utilizamos o 
-		
 		
 		redirectAttributes.addFlashAttribute("message", "Registro salvo"); // vai fazer ele permanecer mesmo apos um redirection, ele cria uma sessão temporaria
 		return "redirect:/cervejas/novo";
