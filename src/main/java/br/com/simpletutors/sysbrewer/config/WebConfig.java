@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -17,6 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import br.com.simpletutors.sysbrewer.controller.CervejasController;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration // indica que é uma class de configuração
 @ComponentScan(basePackageClasses = {CervejasController.class}) //o sistema vai procurar os controle com referencia nesse controller
@@ -45,6 +47,9 @@ public class WebConfig extends WebMvcConfigurerAdapter  implements ApplicationCo
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setEnableSpringELCompiler(true);
 		engine.setTemplateResolver(templateResolver());
+		
+		// adicionando dialet para layout
+		engine.addDialect(new LayoutDialect());
 		return engine;
 	}
 	
@@ -56,5 +61,13 @@ public class WebConfig extends WebMvcConfigurerAdapter  implements ApplicationCo
 		resolver.setTemplateMode(TemplateMode.HTML);
 		return resolver;
 		
-	}	
+	}
+	
+	
+	// metodo para mapea os arquivos de layout da aplicação
+	// css, js etc.
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+	}
 }

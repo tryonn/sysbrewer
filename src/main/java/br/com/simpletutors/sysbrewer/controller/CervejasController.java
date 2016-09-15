@@ -18,7 +18,7 @@ public class CervejasController {
 	// se for um get chama esse
 	@RequestMapping("/cervejas/novo")
 	public String novo(Cerveja cerveja){
-		return "cerveja/CadastroCerveja";
+		return "cerveja/CadastroCerveja2";
 	}
 	
 	// se for um post chama esse
